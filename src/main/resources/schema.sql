@@ -123,3 +123,18 @@ authority               varchar(50)           NOT NULL,
 createTime              timestamp             NOT NULL,
 update                  timestamp             NOT NULL
 );
+
+CREATE TABLE task_type (
+id                      serial      NOT NULL PRIMARY KEY,
+type                    varchar(20) NOT NULL,
+comment                 varchar(50) DEFAULT NULL
+);
+
+CREATE TABLE task (
+id                      serial      NOT NULL PRIMARY KEY,
+user_id                 int         NOT NULL,
+type_id                 int         NOT NULL,
+title                   varchar(50) NOT NULL,
+detail                  text,
+deadline                timestamp    NOT NULL
+);

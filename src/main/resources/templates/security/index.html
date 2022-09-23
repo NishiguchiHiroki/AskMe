@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      th:replace="~{commonLib/layout :: layout(~{::title}, ~{::body})}">
+<head>
+    <title>トップ | Ask Me</title>
+</head>
+<body>
+<h1 class="mt-3">AskMe</h1>
+<ul>
+    <li sec:authorize="hasAuthority('ADMIN')">
+        <a href="./users/list.html" th:href="@{/users}">ユーザー一覧</a>
+    </li>
+    <li>
+        <a href="./logout.html" th:href="@{/logout}">ログアウト</a>
+    </li>
+</ul>
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 
-初期設定：
+初期設定データ：
 INSERT INTO public.users(
 	id, username, email, address, profession, background, introduction, password, enabled, authority, createtime, update)
 	VALUES (1, 'testuser', 'testuser@gmail.com', '大阪', 'エンジニア', '大阪大学', '初めてのユーザ', '22465b478b7409aca964716102421474469e6c22d633078b3321f1c196d498922057452920b00707', 1, 'ADMIN', '20220920', '20220920'
@@ -56,10 +56,3 @@ INSERT INTO public.comment(
 INSERT INTO public.answer(
 	id, ans_content, image, question_id, delete_flag, createtime, update)
 	VALUES (1, 'テストコンテンツ', null, 1, 0, '2022-09-20', '2022-09-20');
-
-
-
-
-
-
-
