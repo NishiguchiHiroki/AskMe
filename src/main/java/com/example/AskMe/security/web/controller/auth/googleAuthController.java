@@ -22,9 +22,8 @@ public class googleAuthController {
 	
 	@GetMapping("/google")
 	  public String google(@AuthenticationPrincipal OidcUser user, Model model) {
-		System.out.println(user.getFullName());
 	    
-	    Optional<User> loginUser = userRepository.findByUsername(user.getEmail());
+	    Optional<User> loginUser = userRepository.findByUserEmail(user.getEmail());
 	    
 	    if(loginUser.isPresent()) {
 	    	return "index";

@@ -10,6 +10,8 @@ import lombok.Data;
 public class User {
 	
 	public User() {}
+	
+	private int id;
 	@NotBlank
 	private String username;
 	@NotBlank

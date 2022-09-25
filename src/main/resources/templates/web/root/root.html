@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	  th:replace="~{fragment/layout :: layout(~{::title},~{::body})}">
+<head>
+    <title>トップ | Ask Me</title>
+</head>
+<body>
+<header>
+	<div class="logo-block">
+		<a href="#"><img th:src="@{/images/icon1.png}" style="width:50px; height:60px;"></a>
+	</div>
+	<div class="header-contents">
+		<div class="header-container" th:object="${loginUser}">
+				<a href="#"><div>フォロー中</div></a>
+				<a href="#"><div>回答する</div></a>
+				<a href="#"><div>通知</div></a>
+				<div>
+					<form action="#" name="" method="Get">
+						<input type="text" placeholder="AskMe内を検索">
+					</form>
+				</div>
+				<a th:href="@{/mypage/{id}(id=*{id})}">マイページ</a>
+				<div>言語切替</div>
+				<a href="#"><div>質問を依頼</div></a>
+		</div>
+	</div>
+</header>
+
+</body>
+</html>

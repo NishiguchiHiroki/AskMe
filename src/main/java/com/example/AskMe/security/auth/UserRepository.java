@@ -10,10 +10,13 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface UserRepository {
 	
-	@Select("select username, email, password, enabled, authority from users where email = #{email}")
-	Optional<User> findByUsername(String email);
+	@Select("select id, username, email, password, enabled, authority from users where id = #{id}")
+	User findByUserId(int id);
 	
-	@Select("select username, email, password, enabled, authority from users")
+	@Select("select id, username, email, password, enabled, authority from users where email = #{email}")
+	Optional<User> findByUserEmail(String email);
+	
+	@Select("select id, username, email, password, enabled, authority from users")
 	List<User> findAll();
 	
 	@Insert("insert into users(username, email, password, enabled, authority, tempkey) values(#{username}, #{username}, #{password}, 1, #{authority}::authority, '1')")

@@ -15,7 +15,7 @@ public class UniqueUsernameValidator implements ConstraintValidator<UniqueUserna
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
 		// TODO 自動生成されたメソッド・スタブ
-		return userRepository.findByUsername(value).isEmpty();
+		return userRepository.findByUserEmail(value).isEmpty();
 	}
 	
 	
