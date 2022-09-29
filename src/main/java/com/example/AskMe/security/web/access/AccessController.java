@@ -24,8 +24,16 @@ public class AccessController {
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     	String loginUserEmail = auth.getName();
     	Optional<User> loginUser = userRepository.findByUserEmail(loginUserEmail);
-    	model.addAttribute("loginUser", loginUser.get());
-        return "web/root/root";
+
+    	if(loginUser.isPresent()) {
+    		model.addAttribute("loginUser", loginUser.get());
+    		return "web/root/root";
+    		
+	    }
+    	
+    		return "web/root/root";
+    	
+        
     }
     
     @GetMapping("/login")

@@ -1,20 +1,20 @@
-package com.example.AskMe.security.web.root;
+package com.example.AskMe.business.customer;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.AskMe.security.auth.User;
 import com.example.AskMe.security.auth.UserRepository;
+
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class rootController {
+public class customerController {
 	
-	private final UserRepository userRepository;
+private final UserRepository userRepository;
 	
 	@GetMapping("/mypage/{id}")
 	public String showMyPage(@PathVariable int id, Model model ) {
@@ -25,7 +25,7 @@ public class rootController {
 		}catch(Exception e) {
 			throw new RuntimeException(e);
 		}
-		return "mypage/mypage";
+		return "customer/mypage";
 	}
 
 }
