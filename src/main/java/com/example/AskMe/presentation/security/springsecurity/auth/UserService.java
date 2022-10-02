@@ -2,6 +2,7 @@ package com.example.AskMe.presentation.security.springsecurity.auth;
 
 import java.util.List;
 
+import org.postgresql.util.PGTimestamp;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,12 +25,12 @@ public class UserService {
 		return userRepository.findAll();
 	}
 	
-	@PreAuthorize("hasAuthority('ADMIN')")
 	public void create(String username, String email, String password, String authority) {
 		var encodePassword = passwordEncoder.encode(password);
 		try {	
 			Authority auth = Authority.valueOf(authority);
-			userRepository.insert(username, email, encodePassword, auth.name());
+			PGTimestamp nowtime = new PGTimestamp(System.currentTimeMillis());
+			userRepository.insert(username, email, encodePassword, auth.name(), nowtime, nowtime);
 		}catch(IllegalArgumentException e) {
 			throw new IllegalArgumentException("該当する権限はありません。");
 		}

@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.and()
 		        .oauth2Login()
 		        .loginPage("/login").permitAll()
+		        .defaultSuccessUrl("/")
 		        .and()
 		        .formLogin()
 		        .loginPage("/login").permitAll()

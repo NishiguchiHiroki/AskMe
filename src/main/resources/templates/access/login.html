@@ -22,8 +22,11 @@
 		<button type="submit" class="btn btn-primary">ログイン</button>
 	</div>
 </form>
-	<div class="mt-3" th:each="clientRegistration : ${@clientRegistrationRepository}">
+	<div class="mt-3" style="float:left;" th:each="clientRegistration : ${@clientRegistrationRepository}">
 		<a class="btn btn-primary" style="margin-left:20px;" th:href="@{/oauth2/authorization/{id}(id=${clientRegistration.registrationId})}">Googleでログイン</a>
+	</div>
+	<div class="mt-3">
+		<a class="btn btn-secondary" style="margin-left:20px;" th:href="@{/signup}">メールで新規登録する</a>
 	</div>
 </body>
 </html>
