@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -14,7 +15,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.AskMe.application.service.security.AccessService;
@@ -55,10 +59,21 @@ public class AccessController {
     }
     
     @PostMapping("/signup")
-    public String createSignupForm(SignUpForm suf, Model model, HttpServletRequest request) {
-    	userService.create(suf.getUsername(), suf.getEmail(), suf.getPassword(), "USER");
+    public String createSignupForm( @Validated @ModelAttribute SignUpForm signUpForm, BindingResult result, Model model, HttpServletRequest request) {
+  
+    		Optional<User> registered = userRepository.findByUserEmail(signUpForm.getEmail());
+ 
+    		if(registered.isPresent()) {
+    			model.addAttribute("email", "email.duplicated");
+                return createValidationErrorResponse();
+    		}
+    		
+    		if(result.hasErrors()) {
+    			model.addAttribute("signUpForm", signUpForm);
+    			return createValidationErrorResponse();
+    		}
+    		userService.create(signUpForm.getUsername(), signUpForm.getEmail(), signUpForm.getPassword(), "USER");
     	
-    	 // ※以下追加部分
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
 
@@ -67,11 +82,15 @@ public class AccessController {
         }
 
         try {
-            request.login(suf.getEmail(), suf.getPassword());
+            request.login(signUpForm.getEmail(), signUpForm.getPassword());
         } catch (ServletException e) {
             e.printStackTrace();
         }
     	
     	return "redirect:/";
+    }
+    
+    private String createValidationErrorResponse() {
+    	return "access/signup";
     }
 }

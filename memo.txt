@@ -1,0 +1,11 @@
+
+・画面遷移先のURLを考える
+・ファイル構成、ファイル名やメソッド名
+・
+
+指定したカラムに一意制約を追加(Postgresql)
+ALTER TABLE users ADD UNIQUE (email);
+
+CREATE CAST (varchar AS authority) WITH INOUT AS IMPLICIT;
+CREATE TYPE authority AS ENUM ('ADMIN' , 'USER');
+ALTER TABLE users ALTER COLUMN authority TYPE authority;

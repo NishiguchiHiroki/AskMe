@@ -34,8 +34,7 @@ public class AccessService {
 			}
 			
 			loginUser = getUserInfo.get();
-			return loginUser;
-			
+			return loginUser;	
 	}
 
 }
