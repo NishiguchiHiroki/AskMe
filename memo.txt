@@ -1,11 +1,26 @@
 
+設計で考える事：
 ・画面遷移先のURLを考える
 ・ファイル構成、ファイル名やメソッド名
 ・
 
-指定したカラムに一意制約を追加(Postgresql)
-ALTER TABLE users ADD UNIQUE (email);
+postgresql：
+columnの入力方法が独特
+　usersテーブルのusernameカラムがあるが、columnがusers_username_keyがカラム名になる
 
-CREATE CAST (varchar AS authority) WITH INOUT AS IMPLICIT;
-CREATE TYPE authority AS ENUM ('ADMIN' , 'USER');
-ALTER TABLE users ALTER COLUMN authority TYPE authority;
+指定したカラムに一意制約を追加
+　ALTER TABLE users ADD UNIQUE (email);
+
+uniqueキー削除コマンド：
+　ALTER TABLE [Table名] DROP CONSTRAINT  [カラム名]
+
+psql_Toolで設定されている制約の確認：
+　AskMe=# \d users
+
+Enum型設定コマンド：
+　CREATE CAST (varchar AS authority) WITH INOUT AS IMPLICIT;
+　CREATE TYPE authority AS ENUM ('ADMIN' , 'USER');
+　ALTER TABLE users ALTER COLUMN authority TYPE authority;
+
+メモ：
+　macバックスラッシュコマンド（\）： option + ¥
