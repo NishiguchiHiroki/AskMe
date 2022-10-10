@@ -54,24 +54,24 @@ public class AccessController {
     }
     
     @GetMapping("/signup")
-    public String showSignupForm() {
+    public String showSignupForm(SignUpForm signUpForm) {
     	return "access/signup";
     }
     
     @PostMapping("/signup")
     public String createSignupForm( @Validated @ModelAttribute SignUpForm signUpForm, BindingResult result, Model model, HttpServletRequest request) {
-  
+    		
+    		if(result.hasErrors()) {
+    			return createValidationErrorResponse();
+    		}
+    		
     		Optional<User> registered = userRepository.findByUserEmail(signUpForm.getEmail());
- 
+    		
     		if(registered.isPresent()) {
-    			model.addAttribute("email", "email.duplicated");
+    			model.addAttribute("email", "すでに登録されているメールアドレスです。");
                 return createValidationErrorResponse();
     		}
     		
-    		if(result.hasErrors()) {
-    			model.addAttribute("signUpForm", signUpForm);
-    			return createValidationErrorResponse();
-    		}
     		userService.create(signUpForm.getUsername(), signUpForm.getEmail(), signUpForm.getPassword(), "USER");
     	
         SecurityContext context = SecurityContextHolder.getContext();
