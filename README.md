@@ -2,10 +2,10 @@
 ■現在開発中になります
 
 ■どういうアプリ：
-　→ 質問アプリ
+ ・質問アプリ
 
 ■目的：
-　→ SpringBootの理解を深めることやDDDの理解
+ ・SpringBootの理解を深めることやDDDの理解
  
 ■技術：
  ・Spring Security
